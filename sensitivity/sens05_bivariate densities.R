@@ -41,7 +41,11 @@ tab2_df <- tab2_df %>%
               y = as.character(x);
               y = case_when(is.na(y) ~ "Missing",
                             TRUE ~ y)
-            })
+            }) %>% 
+  left_join(readRDS(paste0(path_cgm_working,"/cgm_output/mdrf_cgm_summary_2021-02-22.rds")) %>% 
+              dplyr::select(file_name,starts_with("grade")),
+            by = "file_name") %>% 
+  mutate_at(vars(starts_with("grade")),~as.numeric(.))
 
 
 
@@ -114,3 +118,18 @@ sfig7 <- ggpubr::ggarrange(sfig7a,sfig7b,sfig7c,
                            common.legend=TRUE)
 
 sfig7
+
+
+# SFIG 7 -----------------------
+sfig9a <- bivariate_plot(tab2_df,"percent_time_under_70","percent_time_over_180","A","Time below 70 mg/dL (%)","Time above 180 mg/dL")
+sfig9b <- bivariate_plot(tab2_df,"percent_time_70_180","cv","B","Time between 70-180 mg/dL (%)","Coefficient of variation")
+sfig9c <- bivariate_plot(tab2_df,"lbgi","hbgi","C","Low Blood Glucose Index","High Blood Glucose Index")
+sfig9d <- bivariate_plot(tab2_df,"grade_hypo","grade_hyper","D","GRADE hypo","GRADE hyper")
+
+sfig9 <- ggpubr::ggarrange(sfig9a,sfig9b,
+                           sfig9c,sfig9d,
+                           ncol = 2,nrow=2,
+                           legend="bottom",
+                           common.legend=TRUE)
+
+sfig9

@@ -42,7 +42,7 @@ tab2_df <- tab2_df %>%
               y = case_when(is.na(y) ~ "Missing",
                             TRUE ~ y)
             }) %>% 
-  left_join(readRDS(paste0(path_cgm_working,"/cgm_output/mdrf_cgm_summary_2021-02-07.rds")) %>% 
+  left_join(readRDS(paste0(path_cgm_working,"/cgm_output/mdrf_cgm_summary_2021-02-22.rds")) %>% 
               dplyr::select(file_name,starts_with("grade")),
             by = "file_name") %>% 
   mutate_at(vars(starts_with("grade")),~as.numeric(.))
@@ -62,9 +62,9 @@ sens07_df <- tab2_df %>%
                                  hbgi >= 10 & lbgi < 6 ~ 3,
                                  TRUE ~ NA_real_),
          
-         cluster_grade = case_when(grade_hyper < 0.60 & grade_hypo < 0.20 ~ 1,
-                                   grade_hyper < 0.60 & grade_hypo >= 0.20 ~ 2,
-                                   grade_hyper >= 0.60 & grade_hypo < 0.20 ~ 3,
+         cluster_grade = case_when(grade_hyper < 0.90 & grade_hypo < 0.20 ~ 1,
+                                   grade_hyper < 0.90 & grade_hypo >= 0.20 ~ 2,
+                                   grade_hyper >= 0.90 & grade_hypo < 0.20 ~ 3,
                                  TRUE ~ NA_real_)
          ) %>% 
   mutate_at(vars(starts_with("cluster_")),function(x) factor(x,levels=c(1,2,3),labels=c("TIR profile","Hypo profile","Hyper profile")))

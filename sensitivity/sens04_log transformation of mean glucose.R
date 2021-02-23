@@ -10,7 +10,7 @@ tab1_df <- readRDS(paste0(path_cgm_working,"/paper3/paper3_df.RDS")) %>%
   dplyr::mutate(nvisit = n()) %>% 
   dplyr::mutate(nvisit = as.character(nvisit)) %>% 
   dplyr::filter(record_date == min(record_date)) %>% 
-  ungroup()
+  ungroup() 
 
 
 logtab1_df <- tab1_df %>% 
