@@ -124,7 +124,7 @@ sfig7
 sfig9a <- bivariate_plot(tab2_df,"percent_time_under_70","percent_time_over_180","A","Time below 70 mg/dL (%)","Time above 180 mg/dL")
 sfig9b <- bivariate_plot(tab2_df,"percent_time_70_180","cv","B","Time between 70-180 mg/dL (%)","Coefficient of variation")
 sfig9c <- bivariate_plot(tab2_df,"lbgi","hbgi","C","Low Blood Glucose Index","High Blood Glucose Index")
-sfig9d <- bivariate_plot(tab2_df,"grade_hypo","grade_hyper","D","GRADE hypo","GRADE hyper")
+sfig9d <- bivariate_plot(tab2_df,"grade_hypo","grade_hyper","D","%GRADE hypo","%GRADE hyper")
 
 sfig9 <- ggpubr::ggarrange(sfig9a,sfig9b,
                            sfig9c,sfig9d,
@@ -133,3 +133,12 @@ sfig9 <- ggpubr::ggarrange(sfig9a,sfig9b,
                            common.legend=TRUE)
 
 sfig9
+saveRDS(sfig9, paste0(path_cgm_repo,"/paper3/output/sfig9.RDS"))
+if(Sys.info()["user"]=="JVARGH7"){
+  library(GGally)
+  sfig9 <- readRDS(paste0(path_cgm_repo,"/paper3/output/sfig9.RDS"))
+  sfig9
+  tiff(paste0(path_cgm_repo,"/paper3/output/sfig9.tif"),res=300,width = 12,height=8,units = "in")
+  sfig9
+  dev.off()
+}

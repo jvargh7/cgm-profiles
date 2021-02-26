@@ -96,9 +96,9 @@ sfig4
 
 
 # SFIG 8 -----------------------
-sfig8a <- dens_plot(tab2_df,"grade_hypo","A","GRADE hypoglycemia")
-sfig8b <- dens_plot(tab2_df,"grade_eu","B","GRADE euglycemia")
-sfig8c <- dens_plot(tab2_df,"grade_hyper","C","GRADE hyperglycemia")
+sfig8a <- dens_plot(tab2_df,"grade_hypo","A","%GRADE hypoglycemia")
+sfig8b <- dens_plot(tab2_df,"grade_eu","B","%GRADE euglycemia")
+sfig8c <- dens_plot(tab2_df,"grade_hyper","C","%GRADE hyperglycemia")
 
 sfig8 <- ggpubr::ggarrange(sfig8a,sfig8b,sfig8c,
                            ncol = 1,nrow=3,

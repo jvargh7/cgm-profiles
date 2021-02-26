@@ -160,7 +160,7 @@ tab2_df <- tab2_df %>%
   left_join(traintest_df %>% 
               dplyr::select(patient_id,file_name,nmf_r2_hard,nmf_r3_hard,nmf_r4_hard,set),
             by = c("patient_id","file_name")) %>% 
-  mutate(cluster_tt = factor(nmf_r3_hard,levels=c(1,3,2), 
+  mutate(cluster_tt = factor(nmf_r3_hard,levels=c(1,2,3), 
                              labels=c("TIR profile","Hypo profile","Hyper profile")))
 
 with(tab2_df,table(nmf_r2_orig,nmf_r2_hard,set))
